@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Web Calculators!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link href="https://fonts.googleapis.com/css?family=Nova+Mono" rel="stylesheet">
+            <link rel="stylesheet" href="Calculator.css">
+            
+    </head>
+    <body>
+        <div>
+            <h1>Web Calculator</h1>
+
+
+
+            <p> </p>
+            <div style="width:500px;height:100px;border:2px solid #000;"> <br>This is a rectangle!
+
+
+            </div>    
+            <br> 
+            <br> 
+           
+            <form name="rectangleForm" id="rectangleForm" class="forms" method="POST" action="calculationController">
+                <input type="hidden" id="shape" name="shape" value="rectangle"/>
+                <label class="label">Length</label><br>
+                <input name="rectangleLength" id="rectangleLength" class="input" value="" /><br><br>
+                <label class="label">Width</label><br>
+                <input name="rectangleWidth" id="rectangleWidth" class="input" value="" />
+                <br>
+                <br> 
+                <br>
+                <input type="submit" name="submit" value="Get Area"/>
+            </form>    
+        </div>
+    </body>
+</html>
