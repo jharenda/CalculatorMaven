@@ -5,7 +5,6 @@ package edu.wctc.jls.calculatormaven.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,17 +12,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import edu.wctc.jls.calculatormaven.model.AreaCalculationService; 
+import edu.wctc.jls.calculatormaven.model.AreaCalculationService;
 
 /**
  *
  * @author Jennifer
  */
 import javax.servlet.RequestDispatcher;
+
 @WebServlet(name = "calculationController", urlPatterns = {"/calculationController"})
 public class AreaCalculationController extends HttpServlet {
- private static final String RESULTS_PAGE = "/results.jsp";
-    private static final String SHAPE = "shape";
+
+
+    private final String RETURN_PAGE = "/index.jsp";
+    
+    
+    private final String NUMBER_ONE = "numberOne";
+    private final String NUMBER_TWO = "numberTwo";
+        private final String RADIUS = "radius";
+    private final String RESULT_RECT = "resultRect";
+    private final String RESULT_CIRC = "resultCirc";
+    private final String RESULT_TRIG = "resultTrig";
+    
+    
+    public String calcType;
+    
+
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,24 +48,56 @@ public class AreaCalculationController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-           AreaCalculationService calcServ = new AreaCalculationService();
-              String type = request.getParameter(SHAPE);
-             if(type.equals("rectangle")){
-             if (type.equals("rectangle")) {
-                  String length = request.getParameter("rectangleLength");
-                  String width = request.getParameter("rectangleWidth");
-                  String responseMsg = calcServ.getRectangleArea(length, width);
-                 request.setAttribute("area", responseMsg);
-                 request.setAttribute("shape", type);
-                 RequestDispatcher view = request.getRequestDispatcher(RESULTS_PAGE);
-                 view.forward(request, response);
+         AreaCalculationService acs = new AreaCalculationService();
+        
+//        PrintWriter out = response.getWriter();
+//        out.println("<!DOCTYPE html>");
+//        out.println("<html>"); 
+//        out.println("<head>");
+//        out.println("<title>Calculated Area!!</title>");            
+//        out.println("</head>");  
+        
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            calcType = request.getParameter("calcType");
+            if(calcType.equals("Rectangle")){
+                String numberOne = request.getParameter(NUMBER_ONE);
+                String numberTwo = request.getParameter(NUMBER_TWO);
+                String area = acs.getRectangleArea(numberOne, numberTwo);
+                request.setAttribute(RESULT_RECT, area);
+            }
+            if(calcType.equals("Circle")){
+                String radSet = request.getParameter("Radius");
+                String area = acs.getCircleRadius(radSet);
+                request.setAttribute(RESULT_CIRC, area);
+            }
+            if(calcType.equals("Triangle")){
+                String numberOne = request.getParameter(NUMBER_ONE);
+                String numberTwo = request.getParameter(NUMBER_TWO);
+                String area = acs.getPythagoreanArea(numberOne, numberTwo);
+                request.setAttribute(RESULT_TRIG, area);
+            }
         }
-    }
+        catch(Exception numberFormatException){
+            if(calcType.equals("Rectangle")){
+                request.setAttribute(RESULT_RECT, numberFormatException);
+            }
+            if(calcType.equals("Circle")){
+                request.setAttribute(RESULT_CIRC, numberFormatException);
+            }
+            if(calcType.equals("Triangle")){
+                request.setAttribute(RESULT_TRIG, numberFormatException);
+            }
         }
+        
+        RequestDispatcher view = request.getRequestDispatcher(RETURN_PAGE);
+        view.forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

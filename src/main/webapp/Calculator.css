@@ -7,19 +7,20 @@ and open the template in the editor.
     Created on : Feb 1, 2017, 5:29:34 PM
     Author     : Jennifer
 */
-body {
+body, #submitForm {
   
     font-family:
         'Nova Mono', monospace;
-    
+  
     
     
 }
 
-input[name=submit] {    
+input [type=submit] {    
   font-family:
         'Nova Mono', monospace;
   font-weight: bold;
   color: green; 
   font-size: large; 
+  background-color: slateblue;
 }

@@ -18,11 +18,8 @@ and open the template in the editor.
             <h1>Web Calculator</h1>
 
 
-
             <p> </p>
             <div style="width:500px;height:100px;border:2px solid #000;"> <br>This is a rectangle!
-
-
             </div>    
             <br> 
             <br> 
@@ -37,7 +34,22 @@ and open the template in the editor.
                 <br> 
                 <br>
                 <input type="submit" name="submit" value="Get Area"/>
-            </form>    
+            </form>  
+            <form name="circleForm" id="circleForm" class="forms" method="POST" action="calculationController">
+                
+                <input type="hidden" id="shape" name="shape" value="circle"/>
+                
+                  
+        <p> <%=request.getAttribute%></p>
+           <p> ${shape}</p>
+            </form>
+            
+            
+            <form name="circleForm" id="circleForm" class="forms" method="POST" action="calculationController">
+                
+                <input type="hidden" id="shape" name="shape" value="circle"/>
+            </form>
         </div>
+      
     </body>
 </html>

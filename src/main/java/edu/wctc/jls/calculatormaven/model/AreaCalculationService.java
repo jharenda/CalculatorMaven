@@ -23,6 +23,29 @@ public class AreaCalculationService {
         
         return area;
     }
+      
+      
+      public String getCircleRadius(String radius) throws NumberFormatException {
+          
+       String area; 
+      
+       double radiusNumber = Double.parseDouble(radius); 
+       
+       
+        double areaNumber = radiusNumber * radiusNumber * Math.PI;  
+        area = ""+ areaNumber; 
+         return area; 
+       
+      }
+      
+      public final String getPythagoreanArea(String firstSide, String secondSide){
+        double first;
+        double second; 
+        first = Double.parseDouble(firstSide);
+        second = Double.parseDouble(secondSide);
+       double thirdSide = Math.sqrt(first*first+second*second);
+        return thirdSide + "";
+    }
 }
 // throws unchecked number exception- 
 // add validation 
